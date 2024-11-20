@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>URL Shortner</h1>
+    <% if (locals.shortid) { %>
+    <p>Generated URL: http://localhost:8000/url/<%= shortid %></p> 
+    <% } %>
+    <form method="POST" action="/url">
+        <label> Enter the original URL here:</label>
+        <input name="url" type="text"></input>
+        <button type="submit">Generate</button>
+    </form>
+    <% if (locals.urls) { %>
+    <div>
+        <table>
+            <th>Sr. No.</th>
+            <th>Original Url</th>
+            <th>No. of clicks</th>
+            <% urls.forEach((url,index) => { %>
+                <tr>
+                    <td><%= index+1 %></td>
+                    <td><%= url.actualUrl %></td>
+                    <td><%= url.visitHistory.length %></td>
+                </tr>
+            <% }) %>
+        </table>
+    </div>
+    <% } %>
+</body>
+</html>
